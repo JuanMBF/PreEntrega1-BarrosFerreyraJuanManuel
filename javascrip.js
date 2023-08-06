@@ -1,143 +1,79 @@
-let usuario;
-let contrasenia;
-
-for(let i=1; i<=3; i++){
+    let usuario;
+    let contrasenia;
+    
+    for (let i = 1; i <= 3; i++) {
     usuario = prompt('Tu nombre de usuario');
     contrasenia = prompt('Tu contraseña');
-    if((usuario == 'Juan')&&(contrasenia=='1234')){
+    if ((usuario == 'Juan') && (contrasenia == '1234')) {
         alert('Bienvenido Juan !!!!');
         break;
-    }else{
+    } else {
         alert('Usuario y/o contrasenia erroneos');
     }
-}
-
-let id = prompt('Ingresa el codigo del producto 0-salir');
-
-while(id != '0'){
-    switch(id){
-        case '1':
-            alert('Departamento Palermo una noche U$D 25');
-            break;
-        case '2':
-            alert('Departamento Caballito una noche U$D 27 ');
-            break;
-        case '3':
-            alert('Departamento Gerli U$D 5408');
-            break;
-        default:
-            alert('Codigo inexistente');
-            break;
     }
-
-    id = prompt('Ingresa el codigo del producto 0-salir');
-}
-
-// Objeto para almacenar la información de los productos disponibles
-var productos = [
+    
+    const productosPrecio = [
     { nombre: "Smartphone", precio: 500, impuesto: 10, descuento: 5 },
     { nombre: "Tablet", precio: 300, impuesto: 8, descuento: 3 },
     { nombre: "Laptop", precio: 1000, impuesto: 12, descuento: 8 },
-];
-
-  // Función para calcular el precio final de un producto
-function calcularPrecioFinal(precioProducto, impuesto, descuento) {
-    var impuestoAplicado = precioProducto * (impuesto / 100);
-    var descuentoAplicado = precioProducto * (descuento / 100);
-    var precioFinal = precioProducto + impuestoAplicado - descuentoAplicado;
+    ];
+    
+    function calcularPrecioFinal(precioProductoPrecio, impuesto, descuento) {
+      const impuestoAplicado = precioProductoPrecio * (impuesto / 100);
+      const descuentoAplicado = precioProductoPrecio * (descuento / 100);
+    const precioFinal = precioProductoPrecio + impuestoAplicado - descuentoAplicado;
     return precioFinal;
-}
-
-  // Función para realizar el pago en cuotas
-function calcularCuotas(monto, cuotas) {
-    var cuotaMensual = monto / cuotas;
+    }
+    
+    function calcularCuotas(monto, cuotas) {
+    const cuotaMensual = monto / cuotas;
     return cuotaMensual;
-}
-
-  // Función para mostrar los productos disponibles y dejar que el usuario seleccione uno
-function seleccionarProducto() {
+    }
+    
+    function seleccionarProducto() {
     console.log("Productos disponibles:");
-    for (var i = 0; i < productos.length; i++) {
-    console.log(
-        i + 1 + ". " + productos[i].nombre + " - Precio: $" + productos[i].precio
-    );
+    for (let i = 0; i < productosPrecio.length; i++) {
+        console.log(
+        i + 1 + ". " + productosPrecio[i].nombre + " - Precio: $" + productosPrecio[i].precio
+        );
     }
-    var opcion = parseInt(prompt("Seleccione el número del producto deseado:"));
-    if (opcion >= 1 && opcion <= productos.length) {
-    var productoSeleccionado = productos[opcion - 1];
-    return productoSeleccionado;
+    let opcion = parseInt(prompt("Seleccione el número del producto deseado:"));
+    if (opcion >= 1 && opcion <= productosPrecio.length) {
+        let productoSeleccionado = productosPrecio[opcion - 1];
+        return productoSeleccionado;
     } else {
-    console.log("Opción inválida. Vuelva a intentarlo.");
-    return seleccionarProducto();
+        console.log("Opción inválida. Vuelva a intentarlo.");
+        return seleccionarProducto();
     }
-}
-
-  // Función principal del simulador
-function iniciarSimulador() {
-    var producto = seleccionarProducto();
-    var cantidad = parseInt(prompt("Ingrese la cantidad de productos:"));
-    var precioTotal = producto.precio * cantidad;
-    var precioFinal = calcularPrecioFinal(
-    precioTotal,
-    producto.impuesto,
-    producto.descuento
+    }
+    
+    function iniciarSimulador() {
+    let producto = seleccionarProducto();
+    let cantidad = parseInt(prompt("Ingrese la cantidad de productos:"));
+      let precioTotal = producto.precio * cantidad;
+    let precioFinal = calcularPrecioFinal(
+        precioTotal,
+        producto.impuesto,
+        producto.descuento
     );
-    var cuotas = parseInt(prompt("Ingrese la cantidad de cuotas:"));
-    var cuotaMensual = calcularCuotas(precioFinal, cuotas);
-
+    let cuotas = parseInt(prompt("Ingrese la cantidad de cuotas:"));
+    let cuotaMensual = calcularCuotas(precioFinal, cuotas);
+    
     console.log(
-    "Producto seleccionado: " + producto.nombre + " - Precio unitario: $" + producto.precio
+        "Producto seleccionado: " + producto.nombre + " - Precio unitario: $" + producto.precio
     );
     console.log("Cantidad: " + cantidad);
     console.log("Precio total: $" + precioTotal);
     console.log("Precio final con impuestos y descuentos: $" + precioFinal);
     console.log("Pago en " + cuotas + " cuotas de $" + cuotaMensual.toFixed(2));
-}
-
-iniciarSimulador();
-
-
-function calcularCosto(costoTotal) {
-    var resultado = costoTotal;
-    console.log("El costo total es: " + resultado);
-}
-
-function calcularCuotas(monto, cuotas) {
-    var resultado = monto / cuotas;
-    console.log("El pago mensual es: " + resultado);
-}
-
-function calcularValorFinal(valorProducto, impuesto, descuento) {
-    var impuestoAplicado = valorProducto * (impuesto / 100);
-    var descuentoAplicado = valorProducto * (descuento / 100);
-    var resultado = valorProducto + impuestoAplicado - descuentoAplicado;
-    console.log("El valor final es: " + resultado);
-}
-
-function calcularTiempoEspera(turnos) {
-    var resultado = "Tiempo de espera promedio: ..."; 
-    console.log(resultado);
-}
-
-
-function calcularEdadPromedio(edades) {
-    var sumaEdades = 0;
-    for (var i = 0; i < edades.length; i++) {
-        sumaEdades += parseInt(edades[i]);
     }
-    var resultado = sumaEdades / edades.length;
-    console.log("La edad promedio es: " + resultado);
-}
-
-
-function calcularNotaFinal(notas) {
-    var sumaNotas = 0;
-    for (var i = 0; i < notas.length; i++) {
-        sumaNotas += parseFloat(notas[i]);
-    }
-    var resultado = sumaNotas / notas.length;
-    console.log("La nota final es: " + resultado);
-}
+    
+    iniciarSimulador();
+    
+    let notasAlumnos = [8, 9, 7, 6, 10]; // Ejemplo de notas de alumnos
+    
+    calcularNotaFinal(notasAlumnos);
+    
 
 // Ejemplos 
 
@@ -152,3 +88,85 @@ calcularTiempoEspera(50);
 calcularEdadPromedio([20, 25, 30, 35, 40]);
 
 calcularNotaFinal([7, 8, 9, 6, 8]); 
+
+const productos = [
+    { id: 1, nombre: 'Producto 1', precio: 100, foto: 'https://img.buzzfeed.com/buzzfeed-static/static/2020-07/28/22/asset/1a3db609333d/sub-buzz-125-1595975896-20.jpg' },
+    { id: 2, nombre: 'Producto 2', precio: 200, foto: 'maxresdefault.jpg' },
+    { id: 3, nombre: 'Producto 3', precio: 150, foto: 'https://img.buzzfeed.com/buzzfeed-static/static/2020-07/28/22/asset/1a3db609333d/sub-buzz-125-1595975896-20.jpg' },
+];
+
+let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+let cantidad = document.getElementById('cantidad');
+cantidad.innerText = `🛒${carrito.length}`;
+
+    productos.forEach((producto) => {
+        document.getElementById(`btn${producto.id}`).addEventListener('click', () => {
+            agregarACarrito(producto);
+        });
+    });
+
+function agregarACarrito(prodAAgregar) {
+    carrito.push(prodAAgregar);
+    cantidad.innerText = `🛒${carrito.length}`;
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    Swal.fire({
+        title: 'Fantástico!',
+        text: `Agregaste ${prodAAgregar.nombre} al carrito`,
+        imageUrl: prodAAgregar.foto,
+        imageWidth: 200,
+        imageHeight: 200,
+        imageAlt: prodAAgregar.nombre,
+    });
+
+    // Agregar fila a la tabla de carrito
+    document.getElementById('tablabody').innerHTML += `
+        <tr>
+            <td>${prodAAgregar.id}</td>
+            <td>${prodAAgregar.nombre}</td>
+            <td>${prodAAgregar.precio}</td>
+            <td><button class='btn btn-light' onclick='eliminarDelCarrito(${prodAAgregar.id})'>🗑️</button></td>
+        </tr>
+    `;
+
+    // Incrementar el total
+    let totalCarrito = carrito.reduce((acumulador, producto) => acumulador + producto.precio, 0);
+    document.getElementById('total').innerText = 'Total a pagar $: ' + totalCarrito;
+}
+
+function eliminarDelCarrito(idProducto) {
+    carrito = carrito.filter((producto) => producto.id !== idProducto);
+    cantidad.innerText = `🛒${carrito.length}`;
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+
+    // Actualizar la tabla de carrito
+    renderizarCarrito();
+}
+
+function renderizarCarrito() {
+    document.getElementById('tablabody').innerHTML = '';
+    for (const prod of carrito) {
+        // Agregar fila a la tabla de carrito
+        document.getElementById('tablabody').innerHTML += `
+            <tr>
+                <td>${prod.id}</td>
+                <td>${prod.nombre}</td>
+                <td>${prod.precio}</td>
+                <td><button class='btn btn-light' onclick='eliminarDelCarrito(${prod.id})'>🗑️</button></td>
+            </tr>
+        `;
+    }
+
+    // Incrementar el total
+    let totalCarrito = carrito.reduce((acumulador, producto) => acumulador + producto.precio, 0);
+    document.getElementById('total').innerText = 'Total a pagar $: ' + totalCarrito;
+}
+
+// Agregar evento para el botón 'Finalizar Compra'
+let finalizarBtn = document.getElementById('finalizar');
+finalizarBtn.onclick = finalizarCompra;
+
+// Renderizar los productos disponibles al cargar la página
+renderizarProductos(productos);
+
+// Renderizar el contenido del carrito al cargar la página
+renderizarCarrito();
